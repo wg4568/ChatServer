@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+    <script src="static/js/recieve.js"></script>
+    <script src="static/js/send.js"></script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<style>
+#alert {
+    color: #990000;
+}
+#rules {
+    color: #336600;
+}
+</style>
+
+<script>
+function showform() {
+    document.getElementById("form").innerHTML = '<input name="username" placeholder="New username">&nbsp<input type="submit" value="Change">';
+}
+</script>
+
+
+</script>
+
+<div class="jumbotron">
+    <h1>Chat Room</h1>
+    <p>Using as {{ username }}</p>
+    <p>
+        <a href="/user_newid">New Identity</a>&nbsp
+        <a onclick="showform()">Set Identity</a>&nbsp
+        <form action="/user_setid" method="POST" id="form"></form>
+    </p>
+</div>
+
+<div class="container" id="content">
+    <div class="row">
+
+        <form action="/send" method="post" role="form">
+             <input name="user" hidden value="{{ username }}">
+             <input name="content" id="messagebox" style="width:500px">
+ 
+             <button type="button">Send</button>
+        </form>
+
+        <br/>
+
+        <div style="height:600px;width:1000px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+            <div id="log">{{ old | safe }}</div>
+            <a href="/?viewall=1">View older messages</a>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+
+
+</body>
+</html>
